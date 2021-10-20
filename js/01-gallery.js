@@ -8,8 +8,6 @@ gallery.insertAdjacentHTML(("beforeend"), galleryMarkup)
 
 gallery.addEventListener("click", openModal)
 
-gallery.addEventListener("keydown", onEscCloseModal)
-
 let originalImg
 
 function createGalleryMarkup(items) {
@@ -32,34 +30,32 @@ function createGalleryMarkup(items) {
 function openModal(evt) {
     evt.preventDefault();
 
+    const originalImgSrc = evt.target.dataset.source
+
     if (!evt.target.classList.contains("gallery__image")) {
         return
     }
 
     originalImg = basicLightbox.create(`
-        <img src="${evt.target.dataset.source}" width="800" height="600">
+        <img src="${originalImgSrc}" width="800" height="600">
     `
-        // ,
-        //     {
-        //     closable: false
-        // }
     )
 
+    gallery.addEventListener("keydown", onEscCloseModal)
     originalImg.show()
-
-    // console.log(evt.target.src)
 }
 
 function onEscCloseModal(evt) {
-    // console.log(evt.code)
+    evt.preventDefault();
+    
     if (evt.code !== "Escape") {
         return
     }
+
+    gallery.removeEventListener("keydown", onEscCloseModal)
     originalImg.close()
 }
 
-
-console.log(galleryItems);
 
 
 
