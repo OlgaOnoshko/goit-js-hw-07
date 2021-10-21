@@ -4,15 +4,9 @@ import { galleryItems } from './gallery-items.js';
 const gallery = document.querySelector(".gallery")
 const galleryMarkup = createGalleryMarkup(galleryItems)
 
-gallery.addEventListener("click", openModal)
-
-gallery.insertAdjacentHTML(("beforeend"), galleryMarkup)
-
 // gallery.addEventListener("click", openModal)
 
-// gallery.addEventListener("keydown", onEscCloseModal)
-
-let originalImg
+gallery.insertAdjacentHTML(("beforeend"), galleryMarkup)
 
 function createGalleryMarkup(items) {
     return galleryItems.map(({ preview, original, description }) => {
@@ -24,17 +18,18 @@ function createGalleryMarkup(items) {
     }).join("")
 }
 
-function openModal(evt) {
-    evt.preventDefault();
-
-    if (!evt.target.classList.contains("gallery__image")) {
-        return
-    }
-    var lightbox = new SimpleLightbox('.gallery a', {
+const lightbox = new SimpleLightbox('.gallery a', {
         captionsData: 'alt',
         captionPosition: 'bottom',
         captionDelay: 250,
     });
-}
 
-console.log(galleryItems);
+// function openModal(evt) {
+//     evt.preventDefault();
+
+//     if (!evt.target.classList.contains("gallery__image")) {
+//         return
+//     }
+    
+// }
+
